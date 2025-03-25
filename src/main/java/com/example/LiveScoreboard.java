@@ -11,6 +11,10 @@ public class LiveScoreboard {
         matchList = new ArrayList<>();
     }
 
+    public List<Match> getMatchList() {
+        return matchList;
+    }
+
     //start a new match, setting initial score to 0 – 0 and adding it the scoreboard
     public void startMatch(Match match) {
         if(match == null) {
@@ -36,7 +40,7 @@ public class LiveScoreboard {
     }
 
     //get summary of matches ordered by score, in case of same scores ordered by the most recently started match in the scoreboard
-    public void getMatchSummary() {
+    public List<Match> getMatchSummary() {
         matchList.sort(Comparator
                 .comparing(Match::getTotalScore)
                 .thenComparing(Match::getNum)
@@ -45,5 +49,7 @@ public class LiveScoreboard {
         for(Match m : matchList) {
             System.out.println(m.getHomeTeam() + " " + m.getHomeScore() + " - " + m.getAwayScore() + " " + m.getAwayTeam());
         }
+
+        return matchList;
     }
 }
