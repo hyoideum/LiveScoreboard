@@ -1,18 +1,16 @@
 package com.example;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class Match {
-    private static List<Match> matchList = new ArrayList<>();
-
-    private String homeTeam;
-    private String awayTeam;
+    private final String homeTeam;
+    private final String awayTeam;
     private int scoreHome;
     private int scoreAway;
-    private LocalDateTime matchStart;
+    private final LocalDateTime matchStart;
+    private final int num;
+
+    private static int counter;
 
     public Match(String home, String away) {
         this.homeTeam = home;
@@ -20,7 +18,7 @@ public class Match {
         this.scoreHome = 0;
         this.scoreAway = 0;
         this.matchStart = LocalDateTime.now();
-        matchList.add(this);
+        this.num = counter++;
     }
 
     public String getHomeTeam() {
@@ -43,12 +41,12 @@ public class Match {
         return matchStart;
     }
 
-    private int getTotalScore() {
+    public int getTotalScore() {
         return scoreHome + scoreAway;
     }
 
-    public List<Match> getMatchList() {
-        return matchList;
+    public int getNum() {
+        return num;
     }
 
     public void setScore(int scoreHome, int scoreAway) {
@@ -57,27 +55,5 @@ public class Match {
         }
         this.scoreHome = scoreHome;
         this.scoreAway = scoreAway;
-        SortList();
-    }
-
-    public void finishMatch() {
-        matchList.remove(this);
-    }
-
-    private void SortList() {
-        matchList.sort(Comparator
-                .comparing(Match::getTotalScore)
-                .thenComparing(Match::getStart)
-                .reversed());
-    }
-
-    public void PrintMatch() {
-        System.out.println(homeTeam + " " + scoreHome + " - " + scoreAway + " " + awayTeam);
-    }
-
-    public void PrintMatches() {
-        for(Match m : matchList) {
-            m.PrintMatch();
-        }
     }
 }
