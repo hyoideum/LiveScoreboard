@@ -12,9 +12,16 @@ public class Match {
 
     private static int counter;
 
-    public Match(String home, String away) {
-        this.homeTeam = home;
-        this.awayTeam = away;
+    public Match(String homeTeam, String awayTeam) {
+        if(homeTeam == null || homeTeam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Home team name cannot be empty");
+        }
+
+        if(awayTeam == null || awayTeam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Away team name cannot be empty");
+        }
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
         this.scoreHome = 0;
         this.scoreAway = 0;
         this.matchStart = LocalDateTime.now();

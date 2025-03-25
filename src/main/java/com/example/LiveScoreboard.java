@@ -13,16 +13,25 @@ public class LiveScoreboard {
 
     //start a new match, setting initial score to 0 – 0 and adding it the scoreboard
     public void startMatch(Match match) {
+        if(match == null) {
+            throw new IllegalArgumentException("Match cannot be null");
+        }
         matchList.add(match);
     }
 
     //update match score
     public void setScore(Match match, int homeScore, int awayScore) {
+        if(match == null) {
+            throw new IllegalArgumentException("Match cannot be null");
+        }
         match.setScore(homeScore, awayScore);
     }
 
     //finish match in progress and remove it from the scoreboard
     public void finishMatch(Match match) {
+        if(match == null) {
+            throw new IllegalArgumentException("Match cannot be null");
+        }
         matchList.remove(match);
     }
 
