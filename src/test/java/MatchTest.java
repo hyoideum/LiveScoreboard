@@ -98,4 +98,13 @@ public class MatchTest {
         Match match2 = new Match("Home Team 2", "Away Team 2");
         assertNotEquals("Match number should not be the same", match.getNum(), match2.getNum());
     }
+
+    @Test
+    public void testToString() {
+        match.setScore(1,2);
+        String output = "Home Team 1 - 2 Away Team";
+
+        assertEquals(output, match.toString());
+    }
+
 }

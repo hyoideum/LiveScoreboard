@@ -69,6 +69,11 @@ public class LiveScoreboardTest {
         } catch(IllegalArgumentException e) {
             assertEquals("Match cannot be null", e.getMessage());
         }
+
+        liveScoreboard.finishMatch(match);
+        String expectedOutput = "Match already finished" + System.lineSeparator();
+
+        assertEquals(expectedOutput, outputContent.toString());
     }
 
     @Test
@@ -76,22 +81,33 @@ public class LiveScoreboardTest {
         Match match1 = new Match("England", "Portugal");
         Match match2 = new Match("Italy", "Spain");
         Match match3 = new Match("Germany", "France");
+        Match match4 = new Match("Argentina", "South Africa");
+        Match match5 = new Match("Brazil", "Uruguay");
 
         liveScoreboard.startMatch(match1);
         liveScoreboard.startMatch(match2);
         liveScoreboard.startMatch(match3);
+        liveScoreboard.startMatch(match4);
+        liveScoreboard.startMatch(match5);
 
         liveScoreboard.setScore(match1, 1, 2);
         liveScoreboard.setScore(match2, 2, 0);
         liveScoreboard.setScore(match3, 2, 1);
+        liveScoreboard.setScore(match4, 2, 1);
+        liveScoreboard.setScore(match5, 1, 2);
+
 
         List<Match> sortedList = liveScoreboard.getMatchSummary();
 
-        assertEquals("Match list is not sorted correctly", match3, sortedList.get(0));
-        assertEquals("Match list is not sorted correctly", match1, sortedList.get(1));
-        assertEquals("Match list is not sorted correctly", match2, sortedList.get(2));
+        assertEquals("Match list is not sorted correctly", match5, sortedList.get(0));
+        assertEquals("Match list is not sorted correctly", match4, sortedList.get(1));
+        assertEquals("Match list is not sorted correctly", match3, sortedList.get(2));
+        assertEquals("Match list is not sorted correctly", match1, sortedList.get(3));
+        assertEquals("Match list is not sorted correctly", match2, sortedList.get(4));
 
-        String expectedOutput = "Germany 2 - 1 France" + System.lineSeparator() +
+        String expectedOutput = "Brazil 1 - 2 Uruguay" + System.lineSeparator() +
+                "Argentina 2 - 1 South Africa" + System.lineSeparator() +
+                "Germany 2 - 1 France" + System.lineSeparator() +
                 "England 1 - 2 Portugal" + System.lineSeparator() +
                 "Italy 2 - 0 Spain" + System.lineSeparator();
 

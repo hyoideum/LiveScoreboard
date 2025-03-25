@@ -10,7 +10,7 @@ public class Match {
     private final LocalDateTime matchStart;
     private final int num;
 
-    private static int counter;
+    private static int counter = 0;
 
     public Match(String homeTeam, String awayTeam) {
         if(homeTeam == null || homeTeam.trim().isEmpty()) {
@@ -60,7 +60,13 @@ public class Match {
         if(scoreHome < 0 || scoreHome > 99 || scoreAway < 0 || scoreAway > 99) {
             throw new IllegalArgumentException("Invalid score!");
         }
+
         this.scoreHome = scoreHome;
         this.scoreAway = scoreAway;
+    }
+
+    @Override
+    public String toString() {
+        return homeTeam + " " + scoreHome + " - " + scoreAway + " " + awayTeam;
     }
 }

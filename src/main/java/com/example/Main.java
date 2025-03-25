@@ -24,7 +24,12 @@ public class Main {
 
         scoreboard.finishMatch(match1);
 
-        scoreboard.getMatchSummary();
+        Match match6 = new Match("Croatia", "Paraguay");
+        scoreboard.startMatch(match6);
+        match6.setScore(2,0);
 
+        scoreboard.finishMatch(match1);
+
+        scoreboard.getMatchSummary();
     }
 }

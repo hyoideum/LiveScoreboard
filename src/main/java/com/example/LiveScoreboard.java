@@ -20,6 +20,7 @@ public class LiveScoreboard {
         if(match == null) {
             throw new IllegalArgumentException("Match cannot be null");
         }
+        match.setScore(0,0);
         matchList.add(match);
     }
 
@@ -36,6 +37,11 @@ public class LiveScoreboard {
         if(match == null) {
             throw new IllegalArgumentException("Match cannot be null");
         }
+
+        if(!matchList.contains(match)) {
+            System.out.println("Match already finished");
+            return;
+        }
         matchList.remove(match);
     }
 
@@ -47,7 +53,7 @@ public class LiveScoreboard {
                 .reversed());
 
         for(Match m : matchList) {
-            System.out.println(m.getHomeTeam() + " " + m.getHomeScore() + " - " + m.getAwayScore() + " " + m.getAwayTeam());
+            System.out.println(m.toString());
         }
 
         return matchList;
